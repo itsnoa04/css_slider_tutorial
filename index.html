@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slider</title>
+  </head>
+  <body>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        overflow: hidden;
+      }
+      * {
+        box-sizing: border-box;
+        transition: 30ms ease-in-out;
+      }
+      .flex {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .slider-container {
+        padding: 1.5rem 2rem;
+        border-radius: 1.5rem;
+        background-color: #181818;
+      }
+
+      .slider {
+        width: 15rem;
+        height: 0.25rem;
+        border-radius: 0.75rem;
+        background: rgb(100, 100, 100);
+        position: relative;
+      }
+
+      .slider input {
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        border: none;
+        width: 100%;
+        height: 100%;
+        background: none;
+        top: 0;
+        -webkit-appearance: none;
+      }
+
+      .slider input::-webkit-slider-thumb {
+        height: 2rem;
+        width: 2rem;
+        -webkit-appearance: none;
+        background: none;
+        cursor: pointer;
+      }
+      .bar {
+        transform: translatey(-42%);
+        margin-right: 50px;
+        height: 1.5rem;
+        background: #ffffff;
+        border-radius: 0.75rem 0rem 0rem 0.75rem;
+      }
+
+      .thumb {
+        height: 1.5rem;
+        background: hsl(0, 0%, 100%);
+        width: 1.5rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+        transform: translate(-40%, -50%);
+        pointer-events: none;
+        font-size: x-small;
+        font-weight: 700;
+      }
+    </style>
+    <div class="flex">
+      <div class="slider-container">
+        <div class="slider">
+          <div class="thumb" id="thumb">
+            <p id="display">56</p>
+          </div>
+          <div class="bar" id="bar"></div>
+          <input
+            type="range"
+            name="range"
+            id="slider"
+            title="Slider"
+            min="0"
+            max="100"
+            step="5"
+            value="0"
+          />
+        </div>
+      </div>
+    </div>
+    <script>
+      thumb = document.getElementById("thumb");
+      bar = document.getElementById("bar");
+      display = document.getElementById("display");
+
+      const updateStyles = (percent) => {
+        thumb.style.left = percent + "%";
+        bar.style.width = percent + "%";
+        display.innerHTML = percent;
+      };
+      slider = document.getElementById("slider");
+      slider.oninput = (e) => {
+        console.log(e.target.value);
+        updateStyles(e.target.value);
+      };
+      updateStyles(0);
+    </script>
+  </body>
+</html>
